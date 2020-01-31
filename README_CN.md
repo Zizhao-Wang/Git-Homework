@@ -1,6 +1,6 @@
 # homework - 像Git一样的作业提交工具
 
-[![GitHub license](https://img.shields.io/github/license/Dragon1573/homework?style=flat&label=License)](https://github.com/Dragon1573/homework/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Dragon1573/Git-Homework?style=flat&label=License)](https://github.com/Dragon1573/homework/LICENSE)
 
 ## 背景
 

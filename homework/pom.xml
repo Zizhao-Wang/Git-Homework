@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.github.dragon1573</groupId>
+  <artifactId>homework</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>
+
+  <name>homework</name>
+  <url>https://github.com/Dragon1573/Gitwork</url>
+
+  <properties>
+    <encoding>UTF-8</encoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+  </properties>
+
+  <inceptionYear>2020</inceptionYear>
+  <developers>
+    <developer>
+      <email>Legend_1949@126.com</email>
+      <id>Dragon1573</id>
+      <organization>Foshan University</organization>
+      <organizationUrl>https://web.fosu.edu.cn</organizationUrl>
+      <roles>
+        <role>Author</role>
+        <role>Owner</role>
+      </roles>
+      <timezone>UTC +08:00</timezone>
+      <url>https://github.com/Dragon1573</url>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Aliyun Maven Central Repository</name>
+      <url>https://maven.aliyun.com/repository/central</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <name>Aliyun Maven Central Repository</name>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <url>https://maven.aliyun.com/repository/central</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12.4</version>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <forkMode>never</forkMode>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <classifier>jre11</classifier>
+          <archive>
+            <manifest>
+              <mainClass>main.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

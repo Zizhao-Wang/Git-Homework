@@ -1,0 +1,14 @@
+
+Usage: homework [-h | --help] [-v | --version] <command> [<args>]
+
+Options:
+    -h, --help          Display help information
+    -v, --version       Display version information
+
+Commands:
+    init                Create a homework monitor for homework
+submission
+    add <file(s)>       Add files or directories into monitor
+    remove <file(s)>    Remove files or directories from monitor
+    commit <time>       Create a submission mail for your homework and set a timer
+    send <address>      Send homework to the email address when time is up
