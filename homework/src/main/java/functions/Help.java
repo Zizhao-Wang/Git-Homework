@@ -1,9 +1,7 @@
 package functions;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 显示命令行使用帮助
@@ -12,13 +10,11 @@ import java.util.Scanner;
  */
 public class Help {
     public static void print() {
-        URL url = Help.class.getResource("../help.txt");
-        File file = new File(url.getFile());
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
+        InputStream stream = Help.class.getResourceAsStream("../help.txt");
+        try {
+            byte[] bytes = stream.readAllBytes();
+            System.out.print(new String(bytes));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
