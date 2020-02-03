@@ -1,8 +1,10 @@
 package main;
 
+import constants.Commands;
 import constants.Long;
 import constants.Short;
 import functions.Help;
+import functions.Push;
 
 /**
  * 主程序
@@ -10,7 +12,7 @@ import functions.Help;
  * @author Dragon1573
  */
 public class App {
-    private static final String VERSION = "0.1.0";
+    private static final String VERSION = "0.2.0";
 
     /**
      * 主函数
@@ -20,11 +22,39 @@ public class App {
      */
     public static void main(String[] args) {
         if (args.length == 0) {
+            // 没有指定参数/命令时，输出帮助文档
             Help.print();
-        } else if (Short.HELP.equals(args[0]) || Long.HELP.equals(args[0])) {
-            Help.print();
-        } else if (Short.VERSION.equals(args[0]) || Long.VERSION.equals(args[0])) {
-            System.out.println("homework version " + VERSION + "-jre11");
+        }
+
+        // 根据指令进行功能跳转
+        switch (args[0]) {
+            case Short.HELP:
+            case Long.HELP:
+                // 帮助文档
+                Help.print();
+                break;
+
+            case Short.VERSION:
+            case Long.VERSION:
+                // 版本信息
+                System.out.println("homework version" + VERSION + "-jre11");
+                break;
+
+            case Commands.PUSH:
+                // 作业推送（发送电子邮件）
+                if (args.length != Commands.THREE) {
+                    new IllegalArgumentException("参数不完整！").printStackTrace();
+                    System.out.println();
+                    System.out.println("键入 'homework -h' 以查看帮助文档。");
+                } else {
+                    Push.actions(args);
+                }
+                break;
+
+            default:
+                new IllegalArgumentException("未知参数或命令！").printStackTrace();
+                System.out.println();
+                System.out.println("键入 'homework -h' 以查看帮助文档。");
         }
     }
 }
