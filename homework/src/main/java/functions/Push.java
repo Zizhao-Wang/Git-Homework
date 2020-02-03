@@ -38,6 +38,7 @@ public class Push {
     public static void actions(final String[] args) {
         Push push = new Push();
         push.interact();
+        System.out.println();
         if (push.send(args[ONE], args[TWO])) {
             System.out.println("[Info] 邮件发送成功！");
         } else {
