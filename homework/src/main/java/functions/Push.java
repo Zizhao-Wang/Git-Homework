@@ -40,9 +40,9 @@ public class Push {
         push.interact();
         System.out.println();
         if (push.send(args[ONE], args[TWO])) {
-            System.out.println("[Info] 邮件发送成功！");
+            System.out.println("[Info] Send succeeded :-)");
         } else {
-            System.err.println("[Error] 邮件发送失败！");
+            System.err.println("[Error] Send failed :-(");
         }
     }
 
@@ -118,11 +118,18 @@ public class Push {
             // 设置收件人
             message.addRecipient(TO, new InternetAddress(address));
             // 设置邮件主题
-            message.setSubject("[homework CLI] 测试邮件");
+            // TODO: 这个内容应该可以在正式发行版中由用户指定
+            //       此处仅作为GitHub Actions自动化测试用
+            message.setSubject("[GitHub Actions] Apache Maven CI");
 
             // 创建邮件正文文本
             BodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setText("这是一封测试邮件！");
+            // TODO: 这个内容应该可以在正式发行版中由用户指定
+            //       此处仅作为GitHub Actions自动化测试用
+            bodyPart.setText(
+                "This email was sent by GitHub Action test. " +
+                "Please just ignore it and do NOT reply!"
+            );
             // 创建多重消息
             Multipart multipart = new MimeMultipart();
             // 添加文本部分

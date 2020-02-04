@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import constants.Commands;
 import constants.Long;
 import constants.Short;
@@ -12,7 +14,7 @@ import functions.Push;
  * @author Dragon1573
  */
 public class App {
-    private static final String VERSION = "0.2.0";
+    private static final String VERSION = "0.2.1";
 
     /**
      * 主函数
@@ -20,7 +22,7 @@ public class App {
      * @param args
      *     命令行参数
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             // 没有指定参数/命令时，输出帮助文档
             Help.print();
@@ -43,18 +45,20 @@ public class App {
             case Commands.PUSH:
                 // 作业推送（发送电子邮件）
                 if (args.length != Commands.THREE) {
-                    new IllegalArgumentException("参数不完整！").printStackTrace();
+                    new IllegalArgumentException("Arguments incomplete!")
+                        .printStackTrace();
                     System.out.println();
-                    System.out.println("键入 'homework -h' 以查看帮助文档。");
+                    System.out.println("Type 'homework -h' for help.");
                 } else {
                     Push.actions(args);
                 }
                 break;
 
             default:
-                new IllegalArgumentException("未知参数或命令！").printStackTrace();
+                new IllegalArgumentException("Unknown arguments or commands!")
+                    .printStackTrace();
                 System.out.println();
-                System.out.println("键入 'homework -h' 以查看帮助文档。");
+                System.out.println("Type 'homework -h' for help.");
         }
     }
 }

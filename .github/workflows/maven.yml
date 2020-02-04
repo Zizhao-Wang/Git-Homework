@@ -36,6 +36,7 @@ jobs:
             Git-Homework_
             Git-
           shell: bash
+          continue-on-error: true
 
       # 使用GitHub Secrets解锁私密测试文件
       - name: Decrypt secret files
@@ -52,6 +53,5 @@ jobs:
 
       # 移除解密后的测试文件
       - name: Remove Secret File
-        run: ls | grep -v .gpg | xargs rm -Rvf
-        working-directory: ./homework/src/test/resources
+        run: ./.github/scripts/cleanup.sh
         shell: bash

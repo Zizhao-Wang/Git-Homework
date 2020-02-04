@@ -1,7 +1,7 @@
 package main;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.Test;
@@ -11,34 +11,30 @@ import org.junit.Test;
  */
 public class AppTest {
     @Test
-    public void helpTestA() {
+    public void helpTestA() throws IOException {
         App.main(new String[] {"-h"});
     }
 
     @Test
-    public void helpTestB() {
+    public void helpTestB() throws IOException {
         App.main(new String[] {"--help"});
     }
 
     @Test
-    public void versionTestA() {
+    public void versionTestA() throws IOException {
         App.main(new String[] {"-v"});
     }
 
     @Test
-    public void versionTestB() {
+    public void versionTestB() throws IOException {
         App.main(new String[] {"--version"});
     }
 
     @Test
-    public void pushTest() {
+    public void pushTest() throws IOException {
         // 输入流重定向
         InputStream rawIn = System.in;
-        try {
-            System.setIn(new FileInputStream("src/test/resources/config.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        System.setIn(new FileInputStream("src/test/resources/config.txt"));
 
         // 发信测试
         App.main(new String[] {

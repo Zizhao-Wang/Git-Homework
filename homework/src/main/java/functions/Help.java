@@ -12,16 +12,12 @@ import static java.util.Objects.requireNonNull;
  * @author Dragon1573
  */
 public class Help {
-    public static void print() {
+    public static void print() throws IOException {
         ClassLoader loader = Help.class.getClassLoader();
         InputStream stream = loader.getResourceAsStream("help.txt");
-        try {
-            byte[] bytes = requireNonNull(stream).readAllBytes();
-            // 此处必须显示指明使用的字符集
-            // 使用简体中文的Windows默认字符集为GBK
-            System.out.print(new String(bytes, StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        byte[] bytes = requireNonNull(stream).readAllBytes();
+        // 此处必须显示指明使用的字符集
+        // 使用简体中文的Windows默认字符集为GBK
+        System.out.print(new String(bytes, StandardCharsets.UTF_8));
     }
 }

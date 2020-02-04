@@ -1,13 +1,9 @@
 
-用法: homework [-h | --help] [-v | --version] <command> [<args>]
+Usage: homework [-h | --help] [-v | --version] [<command>]
 
-选项:
-    -h, --help                  展示此帮助文档并退出
-    -v, --version               展示版本信息并退出
+Options:
+    -h, --help                  Display this help and exit
+    -v, --version               Display version information and exit
 
-命令:
-    init                        初始化作业归档文件夹并启用作业监听器
-    add <file(s)>               向监听器添加文件
-    remove <file(s)>            从监听器移除文件
-    commit <time>               生成作业归档压缩文件
-    push <files> <address>      将归档压缩文件发送至指定邮箱
+Commands:
+    push <file> <address>       Send file to a specific address
