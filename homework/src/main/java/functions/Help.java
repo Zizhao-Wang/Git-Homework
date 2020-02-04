@@ -2,6 +2,7 @@ package functions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,7 +17,9 @@ public class Help {
         InputStream stream = loader.getResourceAsStream("help.txt");
         try {
             byte[] bytes = requireNonNull(stream).readAllBytes();
-            System.out.print(new String(bytes));
+            // 此处必须显示指明使用的字符集
+            // 使用简体中文的Windows默认字符集为GBK
+            System.out.print(new String(bytes, StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }

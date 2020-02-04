@@ -3,11 +3,11 @@
 
   <groupId>io.github.dragon1573</groupId>
   <artifactId>homework</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <packaging>jar</packaging>
 
   <name>homework</name>
-  <url>https://github.com/Dragon1573/Gitwork</url>
+  <url>https://github.com/Dragon1573/Git-Homework</url>
 
   <properties>
     <encoding>UTF-8</encoding>
@@ -20,6 +20,7 @@
   <developers>
     <developer>
       <email>Legend_1949@126.com</email>
+      <name>べ断桥烟雨ミ</name>
       <id>Dragon1573</id>
       <organization>Foshan University</organization>
       <organizationUrl>https://web.fosu.edu.cn</organizationUrl>
@@ -30,6 +31,23 @@
       <timezone>UTC +08:00</timezone>
       <url>https://github.com/Dragon1573</url>
     </developer>
+    <developer>
+      <id>captain-sjzu</id>
+      <name>wangzizhao</name>
+      <roles>
+        <role>Collaborator</role>
+      </roles>
+      <timezone>UTC +08:00</timezone>
+      <url>https://github.com/captain-sjzu</url>
+    </developer>
+    <developer>
+      <id>uestcmathtop</id>
+      <roles>
+        <role>Collaborator</role>
+      </roles>
+      <timezone>UTC +08:00</timezone>
+      <url>https://github.com/uestcmathtop</url>
+    </developer>
   </developers>
 
   <dependencies>
@@ -39,19 +57,30 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.6.2</version>
+    </dependency>
   </dependencies>
 
+  <!-- 自定义Maven仓库镜像 -->
   <repositories>
     <repository>
       <snapshots>
         <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
       </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
       <id>central</id>
       <name>Aliyun Maven Central Repository</name>
       <url>https://maven.aliyun.com/repository/central</url>
     </repository>
   </repositories>
 
+  <!-- 自定义Maven插件仓库镜像 -->
   <pluginRepositories>
     <pluginRepository>
       <id>central</id>
@@ -91,22 +120,34 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.12.4</version>
+        <!-- 我的本地环境有点问题，必须关闭并行测试 -->
         <configuration>
           <useSystemClassLoader>false</useSystemClassLoader>
           <forkMode>never</forkMode>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
+          <appendAssemblyId>false</appendAssemblyId>
           <classifier>jre11</classifier>
           <archive>
             <manifest>
               <mainClass>main.App</mainClass>
             </manifest>
           </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
     </plugins>
