@@ -2,6 +2,8 @@
 
 [![GitHub license](https://img.shields.io/github/license/Dragon1573/Git-Homework?style=flat&label=License)](https://github.com/Dragon1573/homework/LICENSE)
 
+![Apache Maven CI](https://github.com/Dragon1573/Git-Homework/workflows/Apache%20Maven%20CI/badge.svg)
+
 ## 背景
 
 &emsp;&emsp;相信很多同学都遇到过下面这种情况：
