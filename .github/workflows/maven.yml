@@ -29,7 +29,7 @@ jobs:
       - name: Cache Maven dependencies
         uses: actions/cache@v1
         with:
-          path: $GITHUB_WORKSPACE/.m2_cache
+          path: ~/.m2
           key: Git-Homework_Maven_Dependencies
           restore-keys: |
             Git-Homework_Maven_
@@ -50,3 +50,8 @@ jobs:
         working-directory: ./homework
         continue-on-error: true
 
+      # 移除解密后的测试文件
+      - name: Remove Secret File
+        run: ls | grep -v .gpg | xargs rm -Rvf
+        working-directory: ./homework/src/test/resources
+        shell: bash
