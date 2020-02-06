@@ -7,3 +7,5 @@ Options:
 
 Commands:
     push <file> <address>       Send file to a specific address
+    monitor ...                 Create a monitor of the homework directory
+                                and archive them on time

@@ -1,155 +1,156 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.dragon1573</groupId>
-  <artifactId>homework</artifactId>
-  <version>0.2.1</version>
-  <packaging>jar</packaging>
+    <groupId>io.github.dragon1573</groupId>
+    <artifactId>homework</artifactId>
+    <version>0.2.1</version>
+    <packaging>jar</packaging>
 
-  <name>homework</name>
-  <url>https://github.com/Dragon1573/Git-Homework</url>
+    <name>homework</name>
+    <url>https://github.com/Dragon1573/Git-Homework</url>
 
-  <properties>
-    <encoding>UTF-8</encoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
-  </properties>
+    <properties>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+    </properties>
 
-  <inceptionYear>2020</inceptionYear>
-  <developers>
-    <developer>
-      <email>Legend_1949@126.com</email>
-      <name>べ断桥烟雨ミ</name>
-      <id>Dragon1573</id>
-      <organization>Foshan University</organization>
-      <organizationUrl>https://web.fosu.edu.cn</organizationUrl>
-      <roles>
-        <role>Author</role>
-        <role>Owner</role>
-      </roles>
-      <timezone>UTC +08:00</timezone>
-      <url>https://github.com/Dragon1573</url>
-    </developer>
-    <developer>
-      <id>captain-sjzu</id>
-      <name>wangzizhao</name>
-      <roles>
-        <role>Collaborator</role>
-      </roles>
-      <timezone>UTC +08:00</timezone>
-      <url>https://github.com/captain-sjzu</url>
-    </developer>
-    <developer>
-      <id>uestcmathtop</id>
-      <roles>
-        <role>Collaborator</role>
-      </roles>
-      <timezone>UTC +08:00</timezone>
-      <url>https://github.com/uestcmathtop</url>
-    </developer>
-  </developers>
+    <inceptionYear>2020</inceptionYear>
+    <developers>
+        <developer>
+            <email>Legend_1949@126.com</email>
+            <name>べ断桥烟雨ミ</name>
+            <id>Dragon1573</id>
+            <organization>Foshan University</organization>
+            <organizationUrl>https://web.fosu.edu.cn</organizationUrl>
+            <roles>
+                <role>Author</role>
+                <role>Owner</role>
+            </roles>
+            <timezone>UTC +08:00</timezone>
+            <url>https://github.com/Dragon1573</url>
+        </developer>
+        <developer>
+            <id>captain-sjzu</id>
+            <name>wangzizhao</name>
+            <roles>
+                <role>Collaborator</role>
+            </roles>
+            <timezone>UTC +08:00</timezone>
+            <url>https://github.com/captain-sjzu</url>
+        </developer>
+        <developer>
+            <id>uestcmathtop</id>
+            <roles>
+                <role>Collaborator</role>
+            </roles>
+            <timezone>UTC +08:00</timezone>
+            <url>https://github.com/uestcmathtop</url>
+        </developer>
+    </developers>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.mail</groupId>
-      <artifactId>javax.mail</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+    </dependencies>
 
-  <!-- 自定义Maven仓库镜像 -->
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <id>central</id>
-      <name>Aliyun Maven Central Repository</name>
-      <url>https://maven.aliyun.com/repository/central</url>
-    </repository>
-  </repositories>
+    <!-- 自定义Maven仓库镜像 -->
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <id>central</id>
+            <name>Aliyun Maven Central Repository</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+    </repositories>
 
-  <!-- 自定义Maven插件仓库镜像 -->
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <name>Aliyun Maven Central Repository</name>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <url>https://maven.aliyun.com/repository/central</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <!-- 自定义Maven插件仓库镜像 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Aliyun Maven Central Repository</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </pluginRepository>
+    </pluginRepositories>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.*</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.*</include>
-        </includes>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
 
-    <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-        <!-- 我的本地环境有点问题，必须关闭并行测试 -->
-        <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
-          <forkMode>never</forkMode>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-5</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>attached</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <appendAssemblyId>false</appendAssemblyId>
-          <classifier>jre11</classifier>
-          <archive>
-            <manifest>
-              <mainClass>main.App</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <!-- 我的本地环境有点问题，必须关闭并行测试 -->
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <forkMode>never</forkMode>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2-beta-5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <classifier>jre11</classifier>
+                    <archive>
+                        <manifest>
+                            <mainClass>main.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

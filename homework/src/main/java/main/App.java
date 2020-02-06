@@ -1,12 +1,12 @@
 package main;
 
-import java.io.IOException;
-
 import constants.Commands;
 import constants.Long;
 import constants.Short;
 import functions.Help;
 import functions.Push;
+
+import java.io.IOException;
 
 /**
  * 主程序
@@ -19,8 +19,7 @@ public class App {
     /**
      * 主函数
      *
-     * @param args
-     *     命令行参数
+     * @param args 命令行参数
      */
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
@@ -46,7 +45,7 @@ public class App {
                 // 作业推送（发送电子邮件）
                 if (args.length != Commands.THREE) {
                     new IllegalArgumentException("Arguments incomplete!")
-                        .printStackTrace();
+                            .printStackTrace();
                     System.out.println();
                     System.out.println("Type 'homework -h' for help.");
                 } else {
@@ -56,7 +55,7 @@ public class App {
 
             default:
                 new IllegalArgumentException("Unknown arguments or commands!")
-                    .printStackTrace();
+                        .printStackTrace();
                 System.out.println();
                 System.out.println("Type 'homework -h' for help.");
         }

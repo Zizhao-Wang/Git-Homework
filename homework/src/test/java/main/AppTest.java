@@ -1,10 +1,10 @@
 package main;
 
+import org.junit.Test;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import org.junit.Test;
 
 /**
  * Unit test for simple App.
@@ -12,22 +12,22 @@ import org.junit.Test;
 public class AppTest {
     @Test
     public void helpTestA() throws IOException {
-        App.main(new String[] {"-h"});
+        App.main(new String[]{"-h"});
     }
 
     @Test
     public void helpTestB() throws IOException {
-        App.main(new String[] {"--help"});
+        App.main(new String[]{"--help"});
     }
 
     @Test
     public void versionTestA() throws IOException {
-        App.main(new String[] {"-v"});
+        App.main(new String[]{"-v"});
     }
 
     @Test
     public void versionTestB() throws IOException {
-        App.main(new String[] {"--version"});
+        App.main(new String[]{"--version"});
     }
 
     @Test
@@ -37,13 +37,19 @@ public class AppTest {
         System.setIn(new FileInputStream("src/test/resources/config.txt"));
 
         // 发信测试
-        App.main(new String[] {
-            "push",
-            "src/test/resources/Izumi_Sagiri.png",
-            "Legend_1949@126.com"
+        App.main(new String[]{
+                "push",
+                "src/test/resources/Izumi_Sagiri.png",
+                "Legend_1949@126.com"
         });
 
         // 还原标准输入流
         System.setIn(rawIn);
     }
+
+//    TODO: 实现监控器的测试类
+//    @Test
+//    public void MonitorTest() throws IOException {
+//
+//    }
 }

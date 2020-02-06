@@ -1,8 +1,7 @@
 package functions;
 
-import java.security.GeneralSecurityException;
-import java.util.Properties;
-import java.util.Scanner;
+import com.sun.mail.util.MailSSLSocketFactory;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -11,13 +10,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
-import com.sun.mail.util.MailSSLSocketFactory;
-
-import static javax.mail.Message.RecipientType.TO;
+import java.security.GeneralSecurityException;
+import java.util.Properties;
+import java.util.Scanner;
 
 import static constants.Commands.ONE;
 import static constants.Commands.TWO;
+import static javax.mail.Message.RecipientType.TO;
 
 /**
  * 发送电子邮件
@@ -25,11 +24,17 @@ import static constants.Commands.TWO;
  * @author Dragon1573
  */
 public class Push {
-    /** 发件人地址 */
+    /**
+     * 发件人地址
+     */
     private String from = null;
-    /** 发件服务器 */
+    /**
+     * 发件服务器
+     */
     private String host = null;
-    /** 发件服务器密码 */
+    /**
+     * 发件服务器密码
+     */
     private String key = "";
 
     /**
@@ -81,7 +86,7 @@ public class Push {
      *
      * @return 邮件发送成功反馈
      */
-    private boolean send(final String filePath, final String address) {
+    public boolean send(final String filePath, final String address) {
         boolean isSuccess = false;
         // 获取系统属性
         Properties properties = System.getProperties();
@@ -102,12 +107,12 @@ public class Push {
 
         // 获取默认发信会话
         Session session = Session.getDefaultInstance(
-            properties, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(from, key);
+                properties, new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(from, key);
+                    }
                 }
-            }
         );
 
         // 发送带附件的电子邮件
@@ -127,8 +132,8 @@ public class Push {
             // TODO: 这个内容应该可以在正式发行版中由用户指定
             //       此处仅作为GitHub Actions自动化测试用
             bodyPart.setText(
-                "This email was sent by GitHub Action test. " +
-                "Please just ignore it and do NOT reply!"
+                    "This email was sent by GitHub Action test. " +
+                            "Please just ignore it and do NOT reply!"
             );
             // 创建多重消息
             Multipart multipart = new MimeMultipart();
