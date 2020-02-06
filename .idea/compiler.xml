@@ -14,4 +14,9 @@
       <module name="homework" target="11" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="homework" options="" />
+    </option>
+  </component>
 </project>
