@@ -3,6 +3,9 @@
 echo "Cleaning up all decrypted files ..."
 echo
 
+# Remove profile folder
+rm -Rvf ./homework/.homework/
+
 # Remove all decrypted files
 for file in ./homework/src/test/resources/*
 do

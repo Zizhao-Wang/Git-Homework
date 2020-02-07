@@ -1,5 +1,6 @@
 
-Usage: homework [-h | --help] [-v | --version] [<command>]
+Usage: homework [-h | --help | -v | --version]
+       homework <command> <args>
 
 Options:
     -h, --help                  Display this help and exit
@@ -7,3 +8,10 @@ Options:
 
 Commands:
     push <file> <address>       Send file to a specific address
+    config <item> <value>       Configure profiles of users
+
+There is an available setting item list for command 'homework config':
+    user.email                  Email address use for delivery
+    user.smtp                   The smtp server of your email address
+    user.key                    The password or authentication code of
+                                your email address

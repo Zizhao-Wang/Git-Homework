@@ -5,8 +5,8 @@ echo
 
 # Decrypt the files
 gpg --batch --yes --decrypt --passphrase="$DECRYPTION_KEY" \
---output ./homework/src/test/resources/config.txt \
-./homework/src/test/resources/config.txt.gpg
+--output ./homework/src/test/resources/config.json \
+./homework/src/test/resources/config.json.gpg
 
 gpg --batch --yes --decrypt --passphrase="$DECRYPTION_KEY" \
 --output ./homework/src/test/resources/Izumi_Sagiri.png \

@@ -1,8 +1,8 @@
 package functions;
 
 import java.security.GeneralSecurityException;
+import java.util.Objects;
 import java.util.Properties;
-import java.util.Scanner;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -14,10 +14,12 @@ import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
+import utils.Configurations;
+
 import static javax.mail.Message.RecipientType.TO;
 
-import static constants.Commands.ONE;
-import static constants.Commands.TWO;
+import static utils.Constants.ONE;
+import static utils.Constants.TWO;
 
 /**
  * 发送电子邮件
@@ -25,54 +27,16 @@ import static constants.Commands.TWO;
  * @author Dragon1573
  */
 public class Push {
-    /** 发件人地址 */
-    private String from = null;
-    /** 发件服务器 */
-    private String host = null;
-    /** 发件服务器密码 */
-    private String key = "";
-
     /**
      * 主动作
      */
     public static void actions(final String[] args) {
-        Push push = new Push();
-        push.interact();
         System.out.println();
-        if (push.send(args[ONE], args[TWO])) {
+        if (send(args[ONE], args[TWO])) {
             System.out.println("[Info] Send succeeded :-)");
         } else {
-            System.err.println("[Error] Send failed :-(");
-        }
-    }
-
-    /**
-     * 交互式获取发件人信息
-     */
-    private void interact() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            do {
-                // 发件人地址
-                System.out.print("From: ");
-                from = scanner.nextLine();
-            } while (from == null || "".equals(from));
-            do {
-                // 发件服务器
-                System.out.print("Host: ");
-                host = scanner.nextLine();
-            } while (host == null || "".equals(from));
-            do {
-                // 登陆密码
-                System.out.print("Password: ");
-                // 输入密码不回显
-                try {
-                    // 生产环境下，输入来自命令行
-                    key = new String(System.console().readPassword());
-                } catch (NullPointerException e) {
-                    // 测试环境下，输入来自文件
-                    key = scanner.nextLine();
-                }
-            } while ("".equals(key));
+            System.out.println("[Info] Send failed :-(");
+            throw new AssertionError();
         }
     }
 
@@ -81,12 +45,22 @@ public class Push {
      *
      * @return 邮件发送成功反馈
      */
-    private boolean send(final String filePath, final String address) {
+    private static boolean send(final String filePath, final String address) {
+        Configurations configurations = Config.load();
+        if (configurations == null) {
+            System.err.println(
+                "You haven't told us about yourself! " +
+                "Please help us identify you by using command 'homework config'."
+            );
+        }
         boolean isSuccess = false;
         // 获取系统属性
         Properties properties = System.getProperties();
         // 设置发信服务器
-        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty(
+            "mail.smtp.host",
+            Objects.requireNonNull(configurations).smtp
+        );
         properties.put("mail.smtp.auth", true);
 
         // 全程SSL登录（使用HTTPS连接）
@@ -97,7 +71,8 @@ public class Push {
             properties.put("mail.smtp.ssl.enable", true);
             properties.put("mail.smtp.ssl.socketFactory", factory);
         } catch (GeneralSecurityException e) {
-            e.printStackTrace();
+            System.err.println(e.getLocalizedMessage());
+            assert false : "Cannot create an SSL connection!";
         }
 
         // 获取默认发信会话
@@ -105,7 +80,9 @@ public class Push {
             properties, new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(from, key);
+                    return new PasswordAuthentication(
+                        configurations.email, configurations.password
+                    );
                 }
             }
         );
@@ -114,7 +91,7 @@ public class Push {
         try {
             MimeMessage message = new MimeMessage(session);
             // 设置发件人
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress(configurations.email));
             // 设置收件人
             message.addRecipient(TO, new InternetAddress(address));
             // 设置邮件主题
@@ -149,7 +126,7 @@ public class Push {
             Transport.send(message);
             isSuccess = true;
         } catch (MessagingException e) {
-            e.printStackTrace();
+            System.err.println(e.getLocalizedMessage());
         }
         return isSuccess;
     }

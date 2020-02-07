@@ -3,7 +3,7 @@
 
   <groupId>io.github.dragon1573</groupId>
   <artifactId>homework</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
 
   <name>homework</name>
@@ -54,13 +54,20 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.sun.mail</groupId>
       <artifactId>javax.mail</artifactId>
       <version>1.6.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.62</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -119,11 +126,9 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-        <!-- 我的本地环境有点问题，必须关闭并行测试 -->
+        <version>2.22.2</version>
         <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
-          <forkMode>never</forkMode>
+          <forkCount>0</forkCount>
         </configuration>
       </plugin>
       <plugin>
