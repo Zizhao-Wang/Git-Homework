@@ -90,19 +90,20 @@ public class AppTest {
             Configurations configurations = JSON.parseObject(
                 json, Configurations.class
             );
-            System.out.println("$ homework config user.email " + configurations.email);
+            System.out.println("$ homework config user.email " + configurations
+                .getEmail());
             App.main(new String[] {
-                Constants.CONFIG, Constants.EMAIL, configurations.email
+                Constants.CONFIG, Constants.EMAIL, configurations.getEmail()
             });
             System.out.println();
-            System.out.println("$ homework config user.smtp " + configurations.smtp);
+            System.out.println("$ homework config user.smtp " + configurations.getSmtp());
             App.main(new String[] {
-                Constants.CONFIG, Constants.SMTP, configurations.smtp
+                Constants.CONFIG, Constants.SMTP, configurations.getSmtp()
             });
             System.out.println();
             System.out.println("$ homework config user.key ****************");
             App.main(new String[] {
-                Constants.CONFIG, Constants.KEY, configurations.password
+                Constants.CONFIG, Constants.KEY, configurations.getPassword()
             });
             System.out.println();
         } catch (IOException e) {

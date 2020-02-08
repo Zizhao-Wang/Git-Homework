@@ -6,24 +6,17 @@ package utils;
  * @author Dragon1573
  */
 public class Configurations {
-    /**
-     * 发件电子邮箱
-     */
-    public String email = "";
-    /**
-     * 发件服务器地址
-     */
-    public String smtp = "";
-    /**
-     * 邮箱登陆密码
-     */
-    public String password = "";
+    private String email = "";
+    private String smtp = "";
+    private String password = "";
 
     /**
      * 设置配置
      *
-     * @param item 配置键
-     * @param value 配置值
+     * @param item
+     *     配置键
+     * @param value
+     *     配置值
      */
     public void set(final String item, final String value) {
         if (Constants.EMAIL.equals(item)) {
@@ -37,11 +30,41 @@ public class Configurations {
 
     public void show(final String item) {
         if (Constants.EMAIL.equals(item)) {
-            System.out.println(email);
+            System.out.println(getEmail());
         } else if (Constants.SMTP.equals(item)) {
-            System.out.println(smtp);
+            System.out.println(getSmtp());
         } else if (Constants.KEY.equals(item)) {
-            System.out.println("*".repeat(password.length()));
+            System.out.println("*".repeat(getPassword().length()));
         }
+    }
+
+    /**
+     * 检查用户配置是否为空
+     *
+     * @return {@code boolean}
+     */
+    public final boolean isUnset() {
+        return ("".equals(getEmail()) && "".equals(getSmtp()) && "".equals(getPassword()));
+    }
+
+    /**
+     * 发件电子邮箱
+     */
+    public final String getEmail() {
+        return email;
+    }
+
+    /**
+     * 发件服务器地址
+     */
+    public final String getSmtp() {
+        return smtp;
+    }
+
+    /**
+     * 邮箱登陆密码
+     */
+    public final String getPassword() {
+        return password;
     }
 }

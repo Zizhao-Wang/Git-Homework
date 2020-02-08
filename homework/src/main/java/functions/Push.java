@@ -47,7 +47,7 @@ public class Push {
      */
     private static boolean send(final String filePath, final String address) {
         Configurations configurations = Config.load();
-        if (configurations == null) {
+        if (configurations.isUnset()) {
             System.err.println(
                 "You haven't told us about yourself! " +
                 "Please help us identify you by using command 'homework config'."
@@ -59,7 +59,7 @@ public class Push {
         // 设置发信服务器
         properties.setProperty(
             "mail.smtp.host",
-            Objects.requireNonNull(configurations).smtp
+            Objects.requireNonNull(configurations).getSmtp()
         );
         properties.put("mail.smtp.auth", true);
 
@@ -81,7 +81,7 @@ public class Push {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(
-                        configurations.email, configurations.password
+                        configurations.getEmail(), configurations.getPassword()
                     );
                 }
             }
@@ -91,7 +91,7 @@ public class Push {
         try {
             MimeMessage message = new MimeMessage(session);
             // 设置发件人
-            message.setFrom(new InternetAddress(configurations.email));
+            message.setFrom(new InternetAddress(configurations.getEmail()));
             // 设置收件人
             message.addRecipient(TO, new InternetAddress(address));
             // 设置邮件主题
