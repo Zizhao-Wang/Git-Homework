@@ -61,13 +61,13 @@
       <groupId>com.sun.mail</groupId>
       <artifactId>javax.mail</artifactId>
       <version>1.6.2</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>1.2.62</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
@@ -132,28 +132,27 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-5</version>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
-              <goal>attached</goal>
+              <goal>shade</goal>
             </goals>
+            <configuration>
+              <!-- 指定JRE版本后缀 -->
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>jre11</shadedClassifierName>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <!-- 程序入口 -->
+                  <mainClass>main.App</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <appendAssemblyId>false</appendAssemblyId>
-          <classifier>jre11</classifier>
-          <archive>
-            <manifest>
-              <mainClass>main.App</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
       </plugin>
     </plugins>
   </build>
