@@ -3,6 +3,7 @@ package functions;
 import java.security.GeneralSecurityException;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.Scanner;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -52,6 +53,7 @@ public class Push {
                 "You haven't told us about yourself! " +
                 "Please help us identify you by using command 'homework config'."
             );
+            return false;
         }
         boolean isSuccess = false;
         // 获取系统属性
@@ -88,25 +90,32 @@ public class Push {
         );
 
         // 发送带附件的电子邮件
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
             MimeMessage message = new MimeMessage(session);
             // 设置发件人
             message.setFrom(new InternetAddress(configurations.getEmail()));
             // 设置收件人
             message.addRecipient(TO, new InternetAddress(address));
             // 设置邮件主题
-            // TODO: 这个内容应该可以在正式发行版中由用户指定
-            //       此处仅作为GitHub Actions自动化测试用
-            message.setSubject("[GitHub Actions] Apache Maven CI");
+            System.out.print("Subject: ");
+            String subject = scanner.nextLine();
+            System.out.println(subject);
+            message.setSubject(subject);
 
             // 创建邮件正文文本
+            System.out.println("Body (An empty line will start the submission): ");
             BodyPart bodyPart = new MimeBodyPart();
-            // TODO: 这个内容应该可以在正式发行版中由用户指定
-            //       此处仅作为GitHub Actions自动化测试用
-            bodyPart.setText(
-                "This email was sent by GitHub Action test. " +
-                "Please just ignore it and do NOT reply!"
-            );
+            StringBuilder text = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                String temp = scanner.nextLine();
+                if ("".equals(temp)) {
+                    break;
+                } else {
+                    text.append(temp).append("\n");
+                }
+            }
+            System.out.println(text.toString());
+            bodyPart.setText(text.toString());
             // 创建多重消息
             Multipart multipart = new MimeMultipart();
             // 添加文本部分

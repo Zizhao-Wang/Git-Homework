@@ -39,19 +39,14 @@ public class Configurations {
     }
 
     /**
-     * 检查用户配置是否为空
-     *
-     * @return {@code boolean}
-     */
-    public final boolean isUnset() {
-        return ("".equals(getEmail()) && "".equals(getSmtp()) && "".equals(getPassword()));
-    }
-
-    /**
      * 发件电子邮箱
      */
     public final String getEmail() {
         return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
     }
 
     /**
@@ -61,10 +56,29 @@ public class Configurations {
         return smtp;
     }
 
+    public void setSmtp(final String smtp) {
+        this.smtp = smtp;
+    }
+
     /**
      * 邮箱登陆密码
      */
     public final String getPassword() {
         return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    /**
+     * 检查用户配置是否为空
+     *
+     * @return {@code boolean}
+     */
+    public final boolean isUnset() {
+        return (
+            "".equals(getEmail()) && "".equals(getSmtp()) && "".equals(getPassword())
+        );
     }
 }

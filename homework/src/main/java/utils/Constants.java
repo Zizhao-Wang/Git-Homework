@@ -16,6 +16,7 @@ public class Constants {
 
     public static final String PUSH = "push";
     public static final String CONFIG = "config";
+    public static final String ARCHIVE = "archive";
 
     public static final String EMAIL = "user.email";
     public static final String SMTP = "user.smtp";
