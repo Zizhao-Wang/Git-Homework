@@ -84,10 +84,5 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
-# Secret tesing files
-**/src/test/resources/*
-# Only upload those were encrypted
-!*.gpg
-
-# User profiles
-.homework/
+# Generated Test Files
+*.zip

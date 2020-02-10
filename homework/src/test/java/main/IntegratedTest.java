@@ -15,10 +15,10 @@ import utils.Constants;
 public class IntegratedTest {
     static void archiveTest() {
         System.out.println(
-            "$ homework archive archived target/maven-status target/maven-archiver"
+            "$ homework archive archived src"
         );
         App.main(new String[] {
-            "archive", "archived", "target/maven-status", "target/maven-archiver"
+            "archive", "archived", "src"
         });
         System.out.println();
         System.out.println();
