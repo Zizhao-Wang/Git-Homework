@@ -1,0 +1,70 @@
+# GitHub Actions自动化流程名
+name: Apache Maven CI
+
+# 当收到任意分支的推送事件时触发
+on: push
+
+# 测试全局环境变量
+env:
+  USER_EMAIL: ${{ secrets.DELIVER }}
+  USER_HOST: ${{ secrets.SERVER }}
+  USER_KEY: ${{ secrets.PASSWORD }}
+  TARGET_EMAIL: ${{ secrets.RECEIVER }}
+
+# 自动化任务
+jobs:
+  # 构建任务
+  build:
+    name: Maven Test
+
+    # 在最新版的Windows虚拟机上测试
+    runs-on: windows-latest
+
+    # 测试步骤
+    steps:
+      # 切换编码方式
+      -
+        name: Switch encoding
+        run: |
+          locale
+          export LANG=zh_CN.gbk && echo "Charset changed!"
+          locale
+        shell: bash
+        continue-on-error: true
+
+      # 检出分支
+      -
+        name: Checkout branch
+        uses: actions/checkout@v2
+
+      # 安装JDK 11环境
+      -
+        name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      # 缓存Maven依赖项
+      -
+        name: Cache Maven dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: Git-Homework_Maven_Dependencies
+          shell: bash
+          continue-on-error: true
+
+      # 使用Apache Maven构建项目（跳过测试）
+      -
+        name: Build with Maven
+        run: mvn -B package --file pom.xml
+        working-directory: ./homework
+        shell: bash
+        continue-on-error: true
+
+      # 发行包整体测试
+      -
+        name: Release test
+        run: ./.github/scripts/releaseTest.sh
+        shell: bash
+        continue-on-error: true
