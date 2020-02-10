@@ -1,6 +1,9 @@
 package functions;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 import com.alibaba.fastjson.JSON;
@@ -14,6 +17,13 @@ import utils.Constants;
  * @author Dragon1573
  */
 public class Config {
+    /**
+     * 全局配置文件路径
+     */
+    private static final String GLOBAL_CONF = System.getProperty("user.home")
+                                              + File.separator + ".homework"
+                                              + File.separator + "config.json";
+
     public static void actions(String[] args) {
         switch (args[Constants.ONE]) {
             case Constants.EMAIL:
@@ -43,11 +53,7 @@ public class Config {
      */
     public static Configurations load() {
         Configurations configurations = new Configurations();
-        try (
-            FileInputStream stream = new FileInputStream(
-                new File(".homework/config.json")
-            )
-        ) {
+        try (FileInputStream stream = new FileInputStream(new File(GLOBAL_CONF))) {
             String json = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
             Configurations temp = JSON.parseObject(json, Configurations.class);
             if (temp != null) {
@@ -61,7 +67,7 @@ public class Config {
      * 写入文件
      */
     private static void save(final Configurations configurations) {
-        File file = new File(".homework/config.json");
+        File file = new File(GLOBAL_CONF);
         File parents = file.getParentFile();
         if (!parents.exists()) {
             parents.mkdir();

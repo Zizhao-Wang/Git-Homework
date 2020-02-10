@@ -1,5 +1,6 @@
 package main;
 
+import functions.Archive;
 import functions.Config;
 import functions.Help;
 import functions.Push;
@@ -11,7 +12,7 @@ import utils.Constants;
  * @author Dragon1573
  */
 public class App {
-    private static final String VERSION = "0.3.0";
+    private static final String VERSION = "0.4.0";
 
     /**
      * 主函数
@@ -42,7 +43,6 @@ public class App {
                     // 作业推送（发送电子邮件）
                     if (args.length < Constants.THREE) {
                         System.err.println("Arguments incomplete!");
-                        ;
                         System.err.println();
                         System.err.println("Type 'homework -h' for help.");
                     } else {
@@ -61,7 +61,19 @@ public class App {
                     }
                     break;
 
+                case Constants.ARCHIVE:
+                    // 创建压缩归档文件
+                    if (args.length < Constants.THREE) {
+                        System.err.println("Argument incomplete!");
+                        System.err.println();
+                        System.err.println("Type 'homework -h' for help.");
+                    } else {
+                        Archive.compress(args);
+                    }
+                    break;
+
                 default:
+                    // 返回命令更正提示
                     if (args[0].startsWith(Constants.OPTION_PREFIX)) {
                         System.err.println("Unknown option: " + args[0]);
                     } else {
