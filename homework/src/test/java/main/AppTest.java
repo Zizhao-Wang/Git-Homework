@@ -40,7 +40,8 @@ public class AppTest {
         App.main(new String[]{
                 "push",
                 "src/test/resources/Izumi_Sagiri.png",
-                "Legend_1949@126.com"
+                "Legend_1949@126.com",
+
         });
 
         // 还原标准输入流

@@ -22,12 +22,14 @@ import static javax.mail.Message.RecipientType.TO;
  * 发送电子邮件
  *
  * @author Dragon1573
+ * @author WLSYH
  */
 public class Push {
     /**
-     * 发件人地址
+     * 发件人地址&&默认地址
      */
     private String from = null;
+    private String default_from = null;
     /**
      * 发件服务器
      */
@@ -60,6 +62,10 @@ public class Push {
                 // 发件人地址
                 System.out.print("From: ");
                 from = scanner.nextLine();
+                if (default_from == null) {
+                    System.out.print("DefaultFrom: ");
+                    default_from = scanner.nextLine();
+                }
             } while (from == null || "".equals(from));
             do {
                 // 发件服务器
@@ -86,7 +92,10 @@ public class Push {
      *
      * @return 邮件发送成功反馈
      */
-    public boolean send(final String filePath, final String address) {
+    public boolean send(final String filePath, String address) {
+        if (address == null) {
+            address = default_from;
+        }
         boolean isSuccess = false;
         // 获取系统属性
         Properties properties = System.getProperties();
@@ -118,8 +127,10 @@ public class Push {
         // 发送带附件的电子邮件
         try {
             MimeMessage message = new MimeMessage(session);
-            // 设置发件人
+            // 设置发件人||
             message.setFrom(new InternetAddress(from));
+
+
             // 设置收件人
             message.addRecipient(TO, new InternetAddress(address));
             // 设置邮件主题
