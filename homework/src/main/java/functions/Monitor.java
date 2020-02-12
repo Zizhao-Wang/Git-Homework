@@ -25,7 +25,7 @@ public class Monitor {
                 String fileName = defaultFile + "\\" + event.context();
                 Push pushTemp = new Push();
                 // TODO: 实现监控器与发信功能的交互
-                if (pushTemp.send(fileName, null)){
+                if (Push.send(fileName, null)){
                     System.out.println("[Info] Send succeeded :-)");
                 }
                 else{

@@ -2,55 +2,75 @@ package main;
 
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import utils.Constants;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
     @Test
-    public void helpTestA() throws IOException {
-        App.main(new String[]{"-h"});
+    public synchronized void illegalTestA() {
+        System.out.println("$ homework --error");
+        App.main(new String[] {"--error"});
+        System.out.println();
+        System.out.println();
     }
 
     @Test
-    public void helpTestB() throws IOException {
-        App.main(new String[]{"--help"});
+    public synchronized void illegalTestB() {
+        System.out.println("$ homework error");
+        App.main(new String[] {"error"});
+        System.out.println();
+        System.out.println();
     }
 
     @Test
-    public void versionTestA() throws IOException {
-        App.main(new String[]{"-v"});
+    public synchronized void helpTestA() {
+        System.out.println("$ homework -h");
+        App.main(new String[] {Constants.SHORT_HELP});
+        System.out.println();
+        System.out.println();
     }
 
     @Test
-    public void versionTestB() throws IOException {
-        App.main(new String[]{"--version"});
+    public synchronized void helpTestB() {
+        System.out.println("$ homework --help");
+        App.main(new String[] {Constants.LONG_HELP});
+        System.out.println();
+        System.out.println();
     }
 
     @Test
-    public void pushTest() throws IOException {
-        // 输入流重定向
-        InputStream rawIn = System.in;
-        System.setIn(new FileInputStream("src/test/resources/config.txt"));
-
-        // 发信测试
-        App.main(new String[]{
-                "push",
-                "src/test/resources/Izumi_Sagiri.png",
-                "Legend_1949@126.com",
-
-        });
-
-        // 还原标准输入流
-        System.setIn(rawIn);
+    public synchronized void helpTestC() {
+        System.out.println("$ homework");
+        App.main(new String[] {});
+        System.out.println();
+        System.out.println();
     }
 
-//    TODO: 实现监控器的测试类
-//    @Test
-//    public void MonitorTest() throws IOException {
-//
-//    }
+    @Test
+    public synchronized void versionTestA() {
+        System.out.println("$ homework -v");
+        App.main(new String[] {Constants.SHORT_VERSION});
+        System.out.println();
+        System.out.println();
+    }
+
+    @Test
+    public synchronized void versionTestB() {
+        System.out.println("$ homework --version");
+        App.main(new String[] {Constants.LONG_VERSION});
+        System.out.println();
+        System.out.println();
+    }
+
+    @Test
+    public synchronized void integratedTest() {
+        // 集成测试
+        IntegratedTest.archiveTest();
+        IntegratedTest.configTestB();
+        IntegratedTest.configTestA();
+        IntegratedTest.configTestB();
+        IntegratedTest.pushTest();
+    }
 }
