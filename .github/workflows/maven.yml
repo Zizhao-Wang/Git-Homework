@@ -54,17 +54,15 @@ jobs:
           shell: bash
           continue-on-error: true
 
-      # 使用Apache Maven构建项目（跳过测试）
+      # 使用Apache Maven构建项目
       -
         name: Build with Maven
         run: mvn -B package --file pom.xml
         working-directory: ./homework
         shell: bash
-        continue-on-error: true
 
       # 发行包整体测试
       -
         name: Release test
         run: ./.github/scripts/releaseTest.sh
         shell: bash
-        continue-on-error: true

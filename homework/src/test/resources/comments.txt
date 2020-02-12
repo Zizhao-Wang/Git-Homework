@@ -1,2 +1,2 @@
 [GitHub Actions] Apache Maven CI
-This email was sent by GitHub Action test. Please just ignore it and do NOT reply!
+This email was sent by GitHub Action test. Please just ignore it and DO NOT reply!
