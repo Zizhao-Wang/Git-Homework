@@ -2,7 +2,7 @@
   <img src="introduction.png"  alt="A Git-like CLI Tool for homework submission" />
   <br /><br />
   <p style="text-align: center;">
-    <a href="https://github.com/Dragon1573/homework/LICENSE">
+    <a href="https://github.com/Dragon1573/Git-Homework/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/Dragon1573/Git-Homework?style=flat&label=License" alt="GitHub license" />
     </a>
     <a href="https://github.com/Dragon1573/Git-Homework/actions?query=workflow%3A%22Apache+Maven+CI%22">
