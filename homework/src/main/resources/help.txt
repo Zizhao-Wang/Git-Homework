@@ -7,7 +7,7 @@ Options:
     -v, --version               Display version information and exit
 
 Commands:
-    push <file> <address>       Send file to a specific address
+    push <file> [<address>]     Send file to default or a specific address
     config <item> <value>       Configure profiles of users
     archive <files> ...         Generate an archive file with
                                 specific files or directories
@@ -17,3 +17,4 @@ There is an available setting item list for command 'homework config':
     user.smtp                   The smtp server of your email address
     user.key                    The password or authentication code of
                                 your email address
+    target.default              Default email address you will send to
