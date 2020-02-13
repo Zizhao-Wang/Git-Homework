@@ -24,9 +24,6 @@
 
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 用户配置实例类
  *
@@ -37,7 +34,6 @@ public class Configurations {
     private String smtp = "";
     private String password = "";
     private String target = "";
-    private List<String> targetList = new ArrayList<>();
 
     /**
      * 设置配置
@@ -54,6 +50,8 @@ public class Configurations {
             smtp = value;
         } else if (Constants.KEY.equals(item)) {
             password = value;
+        } else if (Constants.DEFAULT_TARGET.equals(item)) {
+            target = value;
         }
     }
 
@@ -70,6 +68,8 @@ public class Configurations {
             System.out.println(getSmtp());
         } else if (Constants.KEY.equals(item)) {
             System.out.println("*".repeat(getPassword().length()));
+        } else if (Constants.DEFAULT_TARGET.equals(item)) {
+            System.out.println(getTarget());
         }
     }
 
@@ -131,17 +131,6 @@ public class Configurations {
     }
 
     /**
-     * 检查用户配置是否为空
-     *
-     * @return {@code boolean}
-     */
-    public final boolean isUnset() {
-        return (
-            "".equals(getEmail()) && "".equals(getSmtp()) && "".equals(getPassword())
-        );
-    }
-
-    /**
      * 获取默认收件地址
      *
      * @return {@link String}
@@ -161,20 +150,13 @@ public class Configurations {
     }
 
     /**
-     * 获取可选收件人列表
+     * 检查用户配置是否为空
      *
-     * @return {@link List}
+     * @return {@code boolean}
      */
-    public List<String> getTargetList() {
-        return targetList;
-    }
-
-    /**
-     * 设置可选收件人列表
-     *
-     * @param targetList 收件人列表
-     */
-    public void setTargetList(final List<String> targetList) {
-        this.targetList = targetList;
+    public final boolean isUnset() {
+        return (
+            "".equals(getEmail()) && "".equals(getSmtp()) && "".equals(getPassword())
+        );
     }
 }

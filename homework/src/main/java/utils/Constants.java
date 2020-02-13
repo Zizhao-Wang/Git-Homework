@@ -45,4 +45,5 @@ public class Constants {
     public static final String EMAIL = "user.email";
     public static final String SMTP = "user.smtp";
     public static final String KEY = "user.key";
+    public static final String DEFAULT_TARGET = "target.default";
 }

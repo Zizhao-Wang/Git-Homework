@@ -40,11 +40,9 @@ import javax.mail.internet.MimeMultipart;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import utils.Configurations;
+import utils.Constants;
 
 import static javax.mail.Message.RecipientType.TO;
-
-import static utils.Constants.ONE;
-import static utils.Constants.TWO;
 
 /**
  * 发送电子邮件
@@ -54,32 +52,46 @@ import static utils.Constants.TWO;
 public class Push {
     /**
      * 主动作
+     *
+     * @param args
+     *     命令行参数
      */
     public static void actions(final String[] args) {
-        System.out.println();
-        if (send(args[ONE], args[TWO])) {
-            System.out.println("[Info] Send succeeded :-)");
+        if (args.length < Constants.THREE) {
+            Configurations configurations = Config.load();
+            try {
+                send(args[1], configurations.getTarget());
+                System.out.println("Send succeeded :-)");
+            } catch (MessagingException e) {
+                System.err.println(e.getLocalizedMessage());
+                System.err.println("Send failed :-(");
+                System.err.println("Please check your profile and try again later ...");
+            }
         } else {
-            System.out.println("[Info] Send failed :-(");
-            throw new AssertionError();
+            try {
+                send(args[1], args[2]);
+                System.out.println("Send succeeded :-)");
+            } catch (MessagingException e) {
+                System.err.println(e.getLocalizedMessage());
+                System.err.println("Send failed :-(");
+                System.err.println("Please check your profile and try again later ...");
+            }
         }
     }
 
     /**
      * 发送电子邮件
-     *
-     * @return 邮件发送成功反馈
      */
-    private static boolean send(final String filePath, final String address) {
+    private static void send(final String filePath, final String address)
+        throws MessagingException {
         Configurations configurations = Config.load();
         if (configurations.isUnset()) {
             System.err.println(
                 "You haven't told us about yourself! " +
                 "Please help us identify you by using command 'homework config'."
             );
-            return false;
+            return;
         }
-        boolean isSuccess = false;
         // 获取系统属性
         Properties properties = System.getProperties();
         // 设置发信服务器
@@ -157,10 +169,6 @@ public class Push {
             message.setContent(multipart);
             // 发送邮件
             Transport.send(message);
-            isSuccess = true;
-        } catch (MessagingException e) {
-            System.err.println(e.getLocalizedMessage());
         }
-        return isSuccess;
     }
 }

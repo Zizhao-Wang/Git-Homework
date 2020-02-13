@@ -53,6 +53,7 @@ public class Config {
             case Constants.EMAIL:
             case Constants.SMTP:
             case Constants.KEY:
+            case Constants.DEFAULT_TARGET:
                 Configurations configurations = load();
                 if (args.length >= Constants.THREE) {
                     // 存在第三参数，则进行设置
@@ -108,7 +109,7 @@ public class Config {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-            assert false : "Can't save profiles!";
+            throw new AssertionError("[Error] Can't save your profile!", e);
         }
     }
 }

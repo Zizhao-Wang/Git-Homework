@@ -65,7 +65,7 @@ public class App {
 
                 case Constants.PUSH:
                     // 作业推送（发送电子邮件）
-                    if (args.length < Constants.THREE) {
+                    if (args.length < Constants.TWO) {
                         System.err.println("Arguments incomplete!");
                         System.err.println();
                         System.err.println("Type 'homework -h' for help.");
