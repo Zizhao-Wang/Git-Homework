@@ -24,11 +24,11 @@
 
 package functions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 import com.alibaba.fastjson.JSON;
 
@@ -46,7 +46,7 @@ public class Config {
      */
     private static final String GLOBAL_CONF = System.getProperty("user.home")
                                               + File.separator + ".homework"
-                                              + File.separator + "config.json";
+                                              + File.separator + "profile.conf";
 
     public static void actions(String[] args) {
         switch (args[Constants.ONE]) {
@@ -79,7 +79,9 @@ public class Config {
     public static Configurations load() {
         Configurations configurations = new Configurations();
         try (FileInputStream stream = new FileInputStream(new File(GLOBAL_CONF))) {
-            String json = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+            byte[] base64 = stream.readAllBytes();
+            Decoder decoder = Base64.getDecoder();
+            String json = new String(decoder.decode(base64), StandardCharsets.UTF_8);
             Configurations temp = JSON.parseObject(json, Configurations.class);
             if (temp != null) {
                 configurations = temp;
@@ -95,15 +97,24 @@ public class Config {
         File file = new File(GLOBAL_CONF);
         File parents = file.getParentFile();
         if (!parents.exists()) {
-            parents.mkdir();
+            boolean isSuccess = parents.mkdir();
+            assert isSuccess : "Cannot create directory recursively!";
         }
         try {
             if (!file.exists()) {
-                file.createNewFile();
+                boolean isSuccess = file.createNewFile();
+                assert isSuccess : "Cannot create new file!";
             }
-            PrintWriter writer = new PrintWriter(file, StandardCharsets.UTF_8);
+            // 使用二进制存储用户隐私数据
+            FileOutputStream writer = new FileOutputStream(file);
+            // JSON序列化
             String json = JSON.toJSONString(configurations, true);
-            writer.write(json);
+
+            // 使用Base64加密
+            Encoder encoder = Base64.getEncoder();
+            byte[] base64 = encoder.encode(json.getBytes(StandardCharsets.UTF_8));
+            writer.write(base64);
+
             // 内容其实还在缓存上，必须刷入文件中
             writer.flush();
             writer.close();
