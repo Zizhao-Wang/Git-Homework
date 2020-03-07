@@ -36,7 +36,7 @@ import utils.Constants;
  * @author Dragon1573
  */
 public class App {
-    private static final String VERSION = "0.4.1";
+    private static final String VERSION = "0.4.2";
 
     /**
      * 主函数

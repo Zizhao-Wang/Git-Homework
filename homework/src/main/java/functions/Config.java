@@ -68,7 +68,7 @@ public class Config {
             default:
                 System.err.println("[Waring] Settings unknown!");
                 System.out.println();
-                System.out.println("Please");
+                System.out.println("Use \"homework -h\" for help.");
                 break;
         }
     }
