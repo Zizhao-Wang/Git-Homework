@@ -27,7 +27,7 @@
 
   <groupId>io.github.dragon1573</groupId>
   <artifactId>homework</artifactId>
-  <version>0.4.1</version>
+  <version>0.4.2</version>
   <packaging>jar</packaging>
 
   <name>homework</name>
