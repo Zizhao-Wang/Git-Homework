@@ -36,43 +36,6 @@ import org.apache.tools.zip.ZipOutputStream;
  */
 public class Archive {
     /**
-     * 创建压缩文件
-     *
-     * @param args
-     *     命令行参数
-     */
-    public static void compress(final String[] args) {
-        // 目标压缩文件名
-        String targetName = args[1] + ".zip";
-        try {
-            // 文件字节输出流
-            FileOutputStream fileStream = new FileOutputStream(targetName);
-            // 压缩文件输出流
-            ZipOutputStream zipStream = new ZipOutputStream(
-                new BufferedOutputStream(fileStream)
-            );
-
-            // 循环遍历命令行参数中的文件
-            for (int i = 2; i < args.length; i++) {
-                // 待压缩资源文件
-                File resource = new File(args[i]);
-                // 将资源添加到压缩文件中
-                append(zipStream, resource, "");
-            }
-
-            // 关闭流
-            zipStream.close();
-            fileStream.close();
-        } catch (IOException e) {
-            System.err.println(e.getLocalizedMessage());
-            System.err.println(
-                "[Error] Cannot create the archive file! " +
-                "Please try again ..."
-            );
-        }
-    }
-
-    /**
      * 递归添加资源文件/目录
      *
      * @param zipStream
@@ -112,7 +75,8 @@ public class Archive {
                 zipStream.putNextEntry(new ZipEntry(folder));
 
                 // 写入文件
-                byte[] contents = fileStream.readAllBytes();
+                byte[] contents = new byte[fileStream.available()];
+                fileStream.read(contents, 0, fileStream.available());
                 zipStream.write(contents);
             } catch (IOException e) {
                 System.err.println(e.getLocalizedMessage());
@@ -121,6 +85,43 @@ public class Archive {
                     "Please make sure you gave us a correct path ..."
                 );
             }
+        }
+    }
+
+    /**
+     * 创建压缩文件
+     *
+     * @param args
+     *     命令行参数
+     */
+    public static void compress(final String[] args) {
+        // 目标压缩文件名
+        String targetName = args[1] + ".zip";
+        try {
+            // 文件字节输出流
+            FileOutputStream fileStream = new FileOutputStream(targetName);
+            // 压缩文件输出流
+            ZipOutputStream zipStream = new ZipOutputStream(
+                new BufferedOutputStream(fileStream)
+            );
+
+            // 循环遍历命令行参数中的文件
+            for (int i = 2; i < args.length; i++) {
+                // 待压缩资源文件
+                File resource = new File(args[i]);
+                // 将资源添加到压缩文件中
+                append(zipStream, resource, "");
+            }
+
+            // 关闭流
+            zipStream.close();
+            fileStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getLocalizedMessage());
+            System.err.println(
+                "[Error] Cannot create the archive file! " +
+                "Please try again ..."
+            );
         }
     }
 }

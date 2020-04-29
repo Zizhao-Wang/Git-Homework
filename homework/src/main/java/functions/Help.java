@@ -36,12 +36,13 @@ import static java.util.Objects.requireNonNull;
  * @author Dragon1573
  */
 public class Help {
-    public static void print() {
+    public static void print() throws IOException {
         ClassLoader loader = Help.class.getClassLoader();
         InputStream stream = loader.getResourceAsStream("help.txt");
-        byte[] bytes = new byte[0];
+        assert stream != null;
+        byte[] bytes = new byte[stream.available()];
         try {
-            bytes = requireNonNull(stream).readAllBytes();
+            requireNonNull(stream).read(bytes, 0, stream.available());
         } catch (IOException e) {
             e.printStackTrace();
         }

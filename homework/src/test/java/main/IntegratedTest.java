@@ -24,10 +24,7 @@
 
 package main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 
 import utils.Constants;
 
@@ -41,7 +38,7 @@ public class IntegratedTest {
         "You haven't set your environment variables! "
         + "Please set variable: ";
 
-    static void archiveTest() {
+    static void archiveTest() throws IOException {
         System.out.println(
             "$ homework archive archived src"
         );
@@ -52,7 +49,7 @@ public class IntegratedTest {
         System.out.println();
     }
 
-    static void configTestB() {
+    static void configTestB() throws IOException {
         System.out.println("$ homework config user.email");
         App.main(new String[] {Constants.CONFIG, Constants.EMAIL});
         System.out.println();
@@ -71,7 +68,7 @@ public class IntegratedTest {
         System.out.println();
     }
 
-    static void configTestA() {
+    static void configTestA() throws IOException {
         String[] configs = {
             System.getenv("USER_EMAIL"),
             System.getenv("USER_HOST"),
@@ -100,7 +97,7 @@ public class IntegratedTest {
         System.out.println();
     }
 
-    static void pushTest() {
+    static void pushTest() throws IOException {
         // 输入重定向
         InputStream rawIn = System.in;
         try {

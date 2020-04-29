@@ -67,7 +67,10 @@ public class Configurations {
         } else if (Constants.SMTP.equals(item)) {
             System.out.println(getSmtp());
         } else if (Constants.KEY.equals(item)) {
-            System.out.println("*".repeat(getPassword().length()));
+            for (int i = 0; i < getPassword().length(); i++) {
+                System.out.print("*");
+            }
+            System.out.println();
         } else if (Constants.DEFAULT_TARGET.equals(item)) {
             System.out.println(getTarget());
         }

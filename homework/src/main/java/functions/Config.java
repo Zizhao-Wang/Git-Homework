@@ -79,7 +79,8 @@ public class Config {
     public static Configurations load() {
         Configurations configurations = new Configurations();
         try (FileInputStream stream = new FileInputStream(new File(GLOBAL_CONF))) {
-            byte[] base64 = stream.readAllBytes();
+            byte[] base64 = new byte[stream.available()];
+            stream.read(base64, 0, stream.available());
             Decoder decoder = Base64.getDecoder();
             String json = new String(decoder.decode(base64), StandardCharsets.UTF_8);
             Configurations temp = JSON.parseObject(json, Configurations.class);

@@ -24,6 +24,8 @@
 
 package main;
 
+import java.io.IOException;
+
 import functions.Archive;
 import functions.Config;
 import functions.Help;
@@ -44,7 +46,7 @@ public class App {
      * @param args
      *     命令行参数
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             // 没有指定参数/命令时，输出帮助文档
             Help.print();

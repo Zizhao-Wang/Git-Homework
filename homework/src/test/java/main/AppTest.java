@@ -24,6 +24,8 @@
 
 package main;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import utils.Constants;
@@ -33,7 +35,7 @@ import utils.Constants;
  */
 public class AppTest {
     @Test
-    public synchronized void illegalTestA() {
+    public synchronized void illegalTestA() throws IOException {
         System.out.println("$ homework --error");
         App.main(new String[] {"--error"});
         System.out.println();
@@ -41,7 +43,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void illegalTestB() {
+    public synchronized void illegalTestB() throws IOException {
         System.out.println("$ homework error");
         App.main(new String[] {"error"});
         System.out.println();
@@ -49,7 +51,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void helpTestA() {
+    public synchronized void helpTestA() throws IOException {
         System.out.println("$ homework -h");
         App.main(new String[] {Constants.SHORT_HELP});
         System.out.println();
@@ -57,7 +59,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void helpTestB() {
+    public synchronized void helpTestB() throws IOException {
         System.out.println("$ homework --help");
         App.main(new String[] {Constants.LONG_HELP});
         System.out.println();
@@ -65,7 +67,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void helpTestC() {
+    public synchronized void helpTestC() throws IOException {
         System.out.println("$ homework");
         App.main(new String[] {});
         System.out.println();
@@ -73,7 +75,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void versionTestA() {
+    public synchronized void versionTestA() throws IOException {
         System.out.println("$ homework -v");
         App.main(new String[] {Constants.SHORT_VERSION});
         System.out.println();
@@ -81,7 +83,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void versionTestB() {
+    public synchronized void versionTestB() throws IOException {
         System.out.println("$ homework --version");
         App.main(new String[] {Constants.LONG_VERSION});
         System.out.println();
@@ -89,7 +91,7 @@ public class AppTest {
     }
 
     @Test
-    public synchronized void integratedTest() {
+    public synchronized void integratedTest() throws IOException {
         // 集成测试
         IntegratedTest.archiveTest();
         IntegratedTest.configTestB();
